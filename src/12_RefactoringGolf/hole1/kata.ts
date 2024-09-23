@@ -16,7 +16,6 @@ export class Game {
 
   private ifForbiddenMoves(symbol: string, x: number, y: number) {
     if ((this._lastSymbol == ' ') && (symbol == 'O')) {
-
       throw new Error('Invalid first player');
     }
 
