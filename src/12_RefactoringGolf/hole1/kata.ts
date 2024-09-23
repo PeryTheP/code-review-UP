@@ -44,40 +44,50 @@ export class Game {
     )
   };
 
-  public Winner(): string {
-    //if the positions in first row are taken
-    
+  public SecondLineFull(){
+    return (
+        this._toto.TileAt(1, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(1, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(1, 2)!.Symbol != ' '
+    )
 
-    //if the positions in first row are taken
-    if (
-      this._toto.TileAt(1, 0)!.Symbol != ' ' &&
-      this._toto.TileAt(1, 1)!.Symbol != ' ' &&
-      this._toto.TileAt(1, 2)!.Symbol != ' '
-    ) {
-      //if middle row is full with same symbol
-      if (
+  };
+  public SecondLineFullSameSymbol(){
+    return (
         this._toto.TileAt(1, 0)!.Symbol == this._toto.TileAt(1, 1)!.Symbol &&
         this._toto.TileAt(1, 2)!.Symbol == this._toto.TileAt(1, 1)!.Symbol
-      ) {
-        return this._toto.TileAt(1, 0)!.Symbol;
-      }
-    }
+    )
 
-    //if the positions in first row are taken
-    if (
-      this._toto.TileAt(2, 0)!.Symbol != ' ' &&
-      this._toto.TileAt(2, 1)!.Symbol != ' ' &&
-      this._toto.TileAt(2, 2)!.Symbol != ' '
-    ) {
-      //if middle row is full with same symbol
-      if (
+  };
+
+  public ThirdLineFull(){
+    return (
+        this._toto.TileAt(2, 0)!.Symbol != ' ' &&
+        this._toto.TileAt(2, 1)!.Symbol != ' ' &&
+        this._toto.TileAt(2, 2)!.Symbol != ' '
+    )
+
+  };
+  public ThirdLineFullSameSymbol(){
+    return  (
         this._toto.TileAt(2, 0)!.Symbol == this._toto.TileAt(2, 1)!.Symbol &&
         this._toto.TileAt(2, 2)!.Symbol == this._toto.TileAt(2, 1)!.Symbol
-      ) {
-        return this._toto.TileAt(2, 0)!.Symbol;
-      }
-    }
+    )
 
+  };
+
+
+  public Winner(): string {
+
+    if (this.FirstLineFull() && this.FirstLineFullSameSymbol()) {
+      return this._toto.TileAt(0, 0)!.Symbol;
+    }
+    if (this.SecondLineFull() && this.SecondLineFullSameSymbol()) {
+      return this._toto.TileAt(1, 0)!.Symbol;
+    }
+    if (this.ThirdLineFull() && this.ThirdLineFullSameSymbol()) {
+      return this._toto.TileAt(2, 0)!.Symbol;
+    }
     return ' ';
   }
 }
