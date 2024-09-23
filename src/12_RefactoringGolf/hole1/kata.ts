@@ -7,14 +7,14 @@ export class Game {
 
   public Play(symbol: string, x: number, y: number): void {
 
-    this.ifForbiddenMove(symbol, x, y);
+    this.ifForbiddenMoves(symbol, x, y);
 
     // update game state
     this._lastSymbol = symbol;
     this._toto.AddTileAt(symbol, x, y);
   }
 
-  private ifForbiddenMove(symbol: string, x: number, y: number) {
+  private ifForbiddenMoves(symbol: string, x: number, y: number) {
     if ((this._lastSymbol == ' ') && (symbol == 'O')) {
 
       throw new Error('Invalid first player');
