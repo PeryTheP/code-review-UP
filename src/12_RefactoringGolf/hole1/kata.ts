@@ -6,13 +6,20 @@ export class Game {
   private _toto: Board = new Board();
 
   public Play(symbol: string, x: number, y: number): void {
-    //if first move
-    if (this._lastSymbol == ' ') {
-      //if player is X
-      if (symbol == 'O') {
-        throw new Error('Invalid first player');
-      }
+
+    this.ifForbiddenMove(symbol, x, y);
+
+    // update game state
+    this._lastSymbol = symbol;
+    this._toto.AddTileAt(symbol, x, y);
+  }
+
+  private ifForbiddenMove(symbol: string, x: number, y: number) {
+    if ((this._lastSymbol == ' ') && (symbol == 'O')) {
+
+      throw new Error('Invalid first player');
     }
+
     //if not first move but player repeated
     else if (symbol == this._lastSymbol) {
       throw new Error('Invalid next player');
@@ -21,10 +28,6 @@ export class Game {
     else if (this._toto.TileAt(x, y).Symbol != ' ') {
       throw new Error('Invalid position');
     }
-
-    // update game state
-    this._lastSymbol = symbol;
-    this._toto.AddTileAt(symbol, x, y);
   }
 
   public Winner(): string {
